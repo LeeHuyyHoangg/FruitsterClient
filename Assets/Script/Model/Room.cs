@@ -1,22 +1,12 @@
-using System;
+using System.Collections.Generic;
 
 namespace Script.Model
 {
-    [Serializable]
     public class Room
     {
-        
-        public string roomID;
-        public string roomName;
-        public bool hasPass;
-        public int numberOfMembers;
-        
-        public Room(string roomId, string roomName, bool hasPass, int numberOfMembers)
-        {
-            this.roomID = roomId;
-            this.roomName = roomName;
-            this.hasPass = hasPass;
-            this.numberOfMembers = numberOfMembers;
-        }
+        public string RoomID { get; set; }
+        public string RoomName{ get; set; }
+        public bool HasPass{ get; set; }
+        public List<User> OtherPlayers{ get; set; }
     }
 }

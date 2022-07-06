@@ -1,3 +1,4 @@
+using Script.Character;
 using Script.Messages.CsMessages;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,6 +10,7 @@ namespace Script
         private Session serverSession;
         private void Awake()
         {
+            var avatarManager = AvatarSetManager.Instance;
             GameObject appProperties = new GameObject("AppProperties");
             appProperties.AddComponent<AppProperties>();
             serverSession = new Session(AppProperties.ServerIp, AppProperties.ServerTcpPort);

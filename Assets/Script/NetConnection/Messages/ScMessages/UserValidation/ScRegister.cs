@@ -15,7 +15,7 @@ namespace Script.Messages.CsMessages
         {
             if (statusCode.Equals(HttpStatusCode.OK))
             {
-                UserProperties.UserId = uid;
+                UserProperties.MainPlayer.userID = uid;
             }
             else
             {

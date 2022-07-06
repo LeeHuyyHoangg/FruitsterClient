@@ -15,7 +15,7 @@ namespace Script.Messages.CsMessages
             this.password = password;
             this.retypePassword = retypePassword;
             
-            UserProperties.UserName = userName;
+            UserProperties.MainPlayer.userName = userName;
         }
     }
 }

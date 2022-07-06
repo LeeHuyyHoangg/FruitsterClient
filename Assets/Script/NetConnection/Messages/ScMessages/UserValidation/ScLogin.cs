@@ -13,7 +13,7 @@ namespace Script.Messages.ScMessages
         {
             if (statusCode.Equals(HttpStatusCode.OK))
             {
-                UserProperties.UserId = uid;
+                UserProperties.MainPlayer.userID = uid;
             }
             else
             {

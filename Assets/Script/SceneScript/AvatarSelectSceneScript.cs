@@ -1,41 +1,29 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using Script;
+using Script.Character;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CharacterAvatarScript : MonoBehaviour
+public class AvatarSelectSceneScript : MonoBehaviour
 {
     private static int _userSelection = 0;
-    private static List<AvatarSet> _avatarSets = new List<AvatarSet>();
+    private static List<AvatarSet> _avatarSets;
 
     [SerializeField] private Text userName;
     
-    [SerializeField] private Animator avatarImage;
+    [SerializeField] private GameObject avatar;
     [SerializeField] private Text avatarLabel;
     [SerializeField] private Text avatarDescription;
+
+    private GameObject actualAvatar;
     // Start is called before the first frame update
     void Start()
     {
-        userName.text = UserProperties.UserName;
-        
-        string[] lines = File.ReadAllLines(Path.Combine(Application.streamingAssetsPath, "AvatarConfig.txt"));
-        foreach (var line in lines)
-        {
-            _avatarSets.Add(new AvatarSet(line));
-        }
+        _avatarSets = AvatarSetManager.Instance.Get();
 
         UserProperties.UserAvatarSet = _avatarSets[0];
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        avatarImage.runtimeAnimatorController = UserProperties.UserAvatarSet.IdleAnimation;
-        avatarLabel.text = UserProperties.UserAvatarSet.AvatarName;
-        avatarDescription.text = UserProperties.UserAvatarSet.AvatarDescription;
         
+        UpdateAvatar();
     }
 
     public void ChooseIncrease()
@@ -64,7 +52,13 @@ public class CharacterAvatarScript : MonoBehaviour
 
     private void UpdateAvatar()
     {
-        avatarImage.runtimeAnimatorController = UserProperties.UserAvatarSet.IdleAnimation;
+        if (actualAvatar != null)
+        {
+            Destroy(actualAvatar.gameObject);
+        }
+
+        actualAvatar = Instantiate(UserProperties.UserAvatarSet.AvatarPrefab,avatar.transform);
+        // actualAvatar.transform.Translate(avatar.transform.position);
         avatarLabel.text = UserProperties.UserAvatarSet.AvatarName;
         avatarDescription.text = UserProperties.UserAvatarSet.AvatarDescription;
     }

@@ -5,11 +5,11 @@ namespace Script.Messages.ScMessages
 {
     public class ScGetRoomList : ScMessage
     {
-        public List<Room> roomList;
+        public List<SimpleRoom> roomList;
 
         public override void OnMessage(Session session)
         {
-            RoomScript.Instance.rooms = roomList;
+            RoomSelectSceneScript.Instance.rooms = roomList;
         }
     }
 }

@@ -8,14 +8,14 @@ namespace Script.Character
     {
         private static AvatarSetManager _instance;
 
-        public AvatarSetManager Instance
+        public static AvatarSetManager Instance
         {
             get
             {
                 if (_instance == null)
                 {
                     _instance = new AvatarSetManager();
-                    
+                    Init();
                 }
 
                 return _instance;
@@ -23,16 +23,16 @@ namespace Script.Character
         }
         private List<AvatarSet> _avatarSets = new List<AvatarSet>();
 
-        private void Init()
+        private static void Init()
         {
             string[] lines = File.ReadAllLines(Path.Combine(Application.streamingAssetsPath, "AvatarConfig.txt"));
             foreach (var line in lines)
             {
-                _avatarSets.Add(new AvatarSet(line));
+                _instance._avatarSets.Add(new AvatarSet(line));
             }
         }
 
-        private bool HasAsset(string assetName)
+        public bool HasAsset(string assetName)
         {
             foreach (AvatarSet set in _avatarSets)
             {
@@ -45,7 +45,7 @@ namespace Script.Character
             return false;
         }
 
-        private AvatarSet GetAsset(string assetName)
+        public AvatarSet GetAsset(string assetName)
         {
             foreach (AvatarSet set in _avatarSets)
             {
@@ -56,6 +56,11 @@ namespace Script.Character
             }
 
             return null;
+        }
+
+        public List<AvatarSet> Get()
+        {
+            return new List<AvatarSet>(_avatarSets);
         }
     }
 }

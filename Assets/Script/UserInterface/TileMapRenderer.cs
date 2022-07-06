@@ -5,6 +5,7 @@ namespace Script.UserInterface
 {
     public class TileMapRenderer : MonoBehaviour
     {
+        [SerializeField] private new Camera camera;
         [SerializeField] private Tile land;
         [SerializeField] private Tile border;
 
@@ -31,6 +32,12 @@ namespace Script.UserInterface
                     }
                 }
             }
+
+            Vector3 center = tilemap.CellToWorld(new Vector3Int(tilemapSizeX/2+1,tilemapSizeY/2+1,0));
+
+            var transform1 = camera.transform;
+            center.z = transform1.position.z;
+            transform1.position = center;
         }
     }
 }

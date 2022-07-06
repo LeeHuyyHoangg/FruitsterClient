@@ -22,7 +22,7 @@ public class RegisterSceneScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (UserProperties.UserId == null)
+        if (UserProperties.MainPlayer.userID == null)
         {
             if (UserProperties.RegisterFailed)
             {
@@ -35,7 +35,7 @@ public class RegisterSceneScript : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene("RoomScene");
+            SceneManager.LoadScene("RoomAvatarSelectScene");
         }
     }
     

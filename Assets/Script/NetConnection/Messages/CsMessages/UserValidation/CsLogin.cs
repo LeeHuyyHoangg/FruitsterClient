@@ -12,7 +12,7 @@ namespace Script.Messages.CsMessages
         {
             this.userName = userName;
             this.password = password;
-            UserProperties.UserName = userName;
+            UserProperties.MainPlayer.userName = userName;
         }
     }
 }

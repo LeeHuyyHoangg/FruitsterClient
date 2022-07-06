@@ -21,13 +21,13 @@ public class LoginSceneScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (UserProperties.UserId == null)
+        if (UserProperties.MainPlayer.userID == null)
         {
             error.SetActive(UserProperties.LoginFailed);
         }
         else
         {
-            SceneManager.LoadScene("RoomScene");
+            SceneManager.LoadScene("RoomAvatarSelectScene");
         }
         
     }

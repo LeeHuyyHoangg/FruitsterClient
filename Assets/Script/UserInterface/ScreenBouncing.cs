@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Script.Utils;
 using UnityEngine;
 
-public class SreenBouncing : MonoBehaviour
+public class ScreenBouncing : MonoBehaviour
 {
     private bool bounce = false;
     // Start is called before the first frame update
