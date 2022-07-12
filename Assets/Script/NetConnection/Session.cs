@@ -66,8 +66,7 @@ namespace Script
                     if (server.Available > 0)
                     {
                         // Buffer to store the response bytes.
-                        Byte[] data = new Byte[256];
-
+                        Byte[] data = new Byte[2048];
                         // String to store the response ASCII representation.
 
                         // Read the first batch of the TcpServer response bytes.

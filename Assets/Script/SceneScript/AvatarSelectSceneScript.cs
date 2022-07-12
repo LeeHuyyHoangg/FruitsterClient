@@ -11,7 +11,7 @@ public class AvatarSelectSceneScript : MonoBehaviour
 
     [SerializeField] private Text userName;
     
-    [SerializeField] private GameObject avatar;
+    [SerializeField] private GameObject avatarLocation;
     [SerializeField] private Text avatarLabel;
     [SerializeField] private Text avatarDescription;
 
@@ -57,7 +57,7 @@ public class AvatarSelectSceneScript : MonoBehaviour
             Destroy(actualAvatar.gameObject);
         }
 
-        actualAvatar = Instantiate(UserProperties.UserAvatarSet.AvatarPrefab,avatar.transform);
+        actualAvatar = Instantiate(UserProperties.UserAvatarSet.AvatarPrefab,avatarLocation.transform);
         // actualAvatar.transform.Translate(avatar.transform.position);
         avatarLabel.text = UserProperties.UserAvatarSet.AvatarName;
         avatarDescription.text = UserProperties.UserAvatarSet.AvatarDescription;

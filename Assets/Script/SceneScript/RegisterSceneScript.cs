@@ -35,7 +35,7 @@ public class RegisterSceneScript : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene("RoomAvatarSelectScene");
+            SceneManager.LoadScene("AvatarRoomSelectScene");
         }
     }
     

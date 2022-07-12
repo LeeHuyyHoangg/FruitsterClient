@@ -1043,7 +1043,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   userName: {fileID: 1541489685}
-  avatar: {fileID: 2146947482}
+  avatarLocation: {fileID: 2146947482}
   avatarLabel: {fileID: 2098757140}
   avatarDescription: {fileID: 65323038}
 --- !u!1 &424107985

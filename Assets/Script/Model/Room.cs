@@ -7,6 +7,7 @@ namespace Script.Model
         public string RoomID { get; set; }
         public string RoomName{ get; set; }
         public bool HasPass{ get; set; }
-        public List<User> OtherPlayers{ get; set; }
+        public List<User> Players{ get; set; }
+        public string RoomMasterID { get; set; }
     }
 }

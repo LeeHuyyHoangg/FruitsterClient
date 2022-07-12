@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using Script;
 using Script.Messages.CsMessages;
 using Script.Model;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 
 public class RoomSelectSceneScript : SingletonMonoBehavior<RoomSelectSceneScript>
@@ -38,12 +40,18 @@ public class RoomSelectSceneScript : SingletonMonoBehavior<RoomSelectSceneScript
                 roomButtons[i].transform.Find("RoomSize").GetComponent<Text>().text =
                     rooms[i].numberOfMembers + "/" + GamePlayProperties.MaxMemberNumber;
                 roomButtons[i].transform.Find("RoomName").GetComponent<Text>().text = rooms[i].roomName;
-                var simpleRoom = rooms[i];
+
+                var i1 = i;
+                roomButtons[i].onClick.RemoveAllListeners();
                 roomButtons[i].onClick.AddListener(() =>
                 {
-                    if (!simpleRoom.hasPass)
+                    if (!rooms[i1].hasPass)
                     {
-                        JoinRoom(simpleRoom.roomID, null);
+                        JoinRoom(rooms[i1].roomID, null);
+                    }
+                    else
+                    {
+                        
                     }
                 });
             }
@@ -69,7 +77,7 @@ public class RoomSelectSceneScript : SingletonMonoBehavior<RoomSelectSceneScript
 
     private void JoinRoom(string roomId, string pass)
     {
-        UserProperties.UserRoom.RoomID = joinRoomId.text;
-        AppProperties.ServerSession.SendMessage(new CsJoinRoom(joinRoomId.text, joinRoomPass.text));
+        UserProperties.UserRoom.RoomID = roomId;
+        AppProperties.ServerSession.SendMessage(new CsJoinRoom(roomId, pass));
     }
 }

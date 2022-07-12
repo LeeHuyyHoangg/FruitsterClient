@@ -7,13 +7,13 @@ namespace Script.Messages.ScMessages
     public class ScLogin : ScMessage
     {
         public HttpStatusCode statusCode;
-        public string uid;
+        public string userID;
         
         public override void OnMessage(Session session)
         {
             if (statusCode.Equals(HttpStatusCode.OK))
             {
-                UserProperties.MainPlayer.userID = uid;
+                UserProperties.MainPlayer.userID = userID;
             }
             else
             {

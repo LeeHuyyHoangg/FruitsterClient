@@ -1,4 +1,5 @@
 using System.Net;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Script.Messages.ScMessages
@@ -13,7 +14,11 @@ namespace Script.Messages.ScMessages
             if (statusCode == HttpStatusCode.OK)
             {
                 UserProperties.UserRoom.RoomID = roomID;
-                SceneManager.LoadScene("RoomScene");
+                SingletonDontDestroy.Instance.DoAction(() =>SceneManager.LoadScene("RoomScene"));
+            }
+            else
+            {
+                Debug.Log(statusCode);
             }
         }
     }

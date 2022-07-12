@@ -7,12 +7,15 @@ public class PlayerInputMoving : MonoBehaviour
     private new Rigidbody2D rigidbody2D;
     private SpriteRenderer spriteRenderer;
 
+    private bool directionPreference;
+
     // Start is called before the first frame update
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         rigidbody2D = GetComponent<Rigidbody2D>();
         fixedJoystick = GameObject.Find("Fixed Joystick").GetComponent<FixedJoystick>();
+        directionPreference = spriteRenderer.flipX;
     }
 
     private void FixedUpdate()
@@ -23,7 +26,14 @@ public class PlayerInputMoving : MonoBehaviour
             var joyStickDirection = fixedJoystick.Direction;
             if (joyStickDirection.x != 0 && joyStickDirection.y != 0)
             {
-                spriteRenderer.flipX = joyStickDirection.x > 0;
+                if (directionPreference)
+                {
+                    spriteRenderer.flipX = !(joyStickDirection.x > 0);
+                }
+                else
+                {
+                    spriteRenderer.flipX = (joyStickDirection.x > 0);
+                }
 
                 var position = rigidbody2D.position;
 

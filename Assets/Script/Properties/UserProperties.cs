@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Net;
+using System.Runtime.CompilerServices;
 using Script.Character;
 using Script.Model;
 
@@ -31,6 +32,7 @@ namespace Script
         private static Room _userRoom;
         public static Room UserRoom
         {
+            [MethodImpl(MethodImplOptions.Synchronized)]
             get
             {
                 if (_userRoom == null)
@@ -40,6 +42,7 @@ namespace Script
 
                 return _userRoom;
             }
+            [MethodImpl(MethodImplOptions.Synchronized)]
             set
             {
                 _userRoom = value;

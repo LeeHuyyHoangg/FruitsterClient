@@ -22,7 +22,9 @@ namespace Script.Utils
             Debug.Log("Message type: " + json.Substring(0, messageTypeLength));
             Debug.Log("Message data: " + json.Substring(messageTypeLength, json.Length - messageTypeLength));
             if (!messageType.IsSubclassOf(typeof(Message)))
+            {
                 return null;
+            }
             return (Message) JsonConvert.DeserializeObject(
                 json.Substring(messageTypeLength, json.Length - messageTypeLength), messageType);
         }

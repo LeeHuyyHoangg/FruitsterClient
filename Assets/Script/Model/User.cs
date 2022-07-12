@@ -7,8 +7,7 @@ namespace Script.Model
     {
         public string userID;
         public string userName;
-        public bool isMaster;
-        public string avatar = "bunny";
+        public string avatar = "Bunny";
 
         public User()
         {

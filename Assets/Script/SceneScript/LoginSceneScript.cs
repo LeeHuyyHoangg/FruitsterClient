@@ -27,7 +27,7 @@ public class LoginSceneScript : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene("RoomAvatarSelectScene");
+            SceneManager.LoadScene("AvatarRoomSelectScene");
         }
         
     }

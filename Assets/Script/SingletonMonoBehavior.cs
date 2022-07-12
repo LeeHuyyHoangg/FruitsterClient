@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Script
@@ -22,10 +24,10 @@ namespace Script
             if (_instance == null)
             {
                 GetInstance();
-                DontDestroyOnLoad(gameObject);
+                // DontDestroyOnLoad(gameObject);
             }
-            else
-                Destroy(gameObject);
+            // else
+            //     Destroy(gameObject);
         }
 
         private static void GetInstance()
@@ -36,6 +38,17 @@ namespace Script
                 var newGo = new GameObject(typeof(T).Name, typeof(T));
                 _instance = newGo.GetComponent<T>();
             }
+        }
+
+        public void RunAfterMillisSec(Action action, int millisSec)
+        {
+            Instance.StartCoroutine(InvokeAfterMillisSec(action, millisSec));
+        }
+        
+        private IEnumerator InvokeAfterMillisSec(Action action, int millisSec)
+        {
+            yield return new WaitForSeconds(millisSec);
+            action?.Invoke();
         }
     }
 }

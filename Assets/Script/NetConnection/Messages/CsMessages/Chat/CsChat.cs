@@ -7,7 +7,7 @@ namespace Script.Messages.CsMessages
     {
         public string message;
 
-        public CsChat(string message)
+        public CsChat( string message)
         {
             this.message = message;
         }

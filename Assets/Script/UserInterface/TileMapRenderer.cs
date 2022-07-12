@@ -5,17 +5,17 @@ namespace Script.UserInterface
 {
     public class TileMapRenderer : MonoBehaviour
     {
+        public int tilemapSizeX = 20;
+        public int tilemapSizeY = 20;
+        
         [SerializeField] private new Camera camera;
         [SerializeField] private Tile land;
         [SerializeField] private Tile border;
 
         [SerializeField] private Tilemap tilemap;
 
-        [SerializeField] private int tilemapSizeX = 20;
         
-        [SerializeField] private int tilemapSizeY = 20;
-        
-        private void Awake()
+        private void Start()
         {
             for (int x = 0; x < tilemapSizeX + 2; x++)
             {

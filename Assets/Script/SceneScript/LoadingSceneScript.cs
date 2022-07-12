@@ -23,7 +23,7 @@ namespace Script
             if (serverSession.IsReady())
             {
                 AppProperties.ServerSession = serverSession;
-                SceneManager.LoadScene("LoginScene");
+                SingletonDontDestroy.Instance.DoAction(() => SceneManager.LoadScene("LoginScene"));
             }
         }
     }
