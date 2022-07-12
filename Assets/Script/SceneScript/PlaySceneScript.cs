@@ -19,7 +19,6 @@ public class PlaySceneScript : MonoBehaviour
         camera = GameObject.Find("Main Camera").GetComponent<Camera>();
         Debug.Log(tilemap);
         Debug.Log(camera);
-        tilemap.GetComponent<TilemapCollider2D>().usedByComposite = true;
     }
 
     private void Start()

@@ -40,15 +40,17 @@ namespace Script
             }
         }
 
-        public void RunAfterMillisSec(Action action, int millisSec)
+        public void RunAfterSec(Action action, int sec)
         {
-            Instance.StartCoroutine(InvokeAfterMillisSec(action, millisSec));
+            Debug.Log("Start");
+            Instance.StartCoroutine(InvokeAfterMillisSec(action, sec));
         }
         
-        private IEnumerator InvokeAfterMillisSec(Action action, int millisSec)
+        private IEnumerator InvokeAfterMillisSec(Action action, int sec)
         {
-            yield return new WaitForSeconds(millisSec);
+            yield return new WaitForSeconds(sec);
             action?.Invoke();
+            Debug.Log("done");
         }
     }
 }

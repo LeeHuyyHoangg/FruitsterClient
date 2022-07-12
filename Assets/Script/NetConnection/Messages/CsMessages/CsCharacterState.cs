@@ -4,18 +4,22 @@ using UnityEngine;
 namespace Script.Messages.CsMessages
 {
     [Serializable]
-    public class CsCharacterState
+    public class CsCharacterState : CsMessage
     {
         public string id;
-        public Vector2 location;
-        public Vector2 direction;
+        public float locationX;
+        public float locationY;
+        public float directionX;
+        public float directionY;
         public CharacterState state;
 
         public CsCharacterState(string id, Vector2 location, Vector2 direction, CharacterState state)
         {
             this.id = id;
-            this.location = location;
-            this.direction = direction;
+            this.locationX = location.x;
+            this.locationY = location.y;
+            this.directionX = direction.x;
+            this.directionY = direction.y;
             this.state = state;
         }
     }

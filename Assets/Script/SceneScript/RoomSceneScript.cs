@@ -10,7 +10,7 @@ namespace Script
 {
     public class RoomSceneScript : SingletonMonoBehavior<RoomSceneScript>
     {
-        private const int ChatBubbleExistTime = 3000;
+        
         [SerializeField] private List<Text> userNames;
         [SerializeField] private List<GameObject> avatarLocations;
 
@@ -75,7 +75,7 @@ namespace Script
                 chatBubbleObject.GetComponentInChildren<Text>().text = message;
                 chatBubbleObject.SetActive(true);
 
-                RunAfterMillisSec(() =>
+                RunAfterSec(() =>
                 {
                     try
                     {
@@ -85,7 +85,7 @@ namespace Script
                     {
                         //ignored
                     }
-                }, ChatBubbleExistTime);
+                }, GamePlayProperties.ChatBubbleExistTime);
             });
         }
     }

@@ -1,4 +1,7 @@
+
 using Script;
+using Script.Messages.CsMessages;
+using Script.Utils;
 using UnityEngine;
 
 public class PlayerInputMoving : MonoBehaviour
@@ -9,9 +12,15 @@ public class PlayerInputMoving : MonoBehaviour
 
     private bool directionPreference;
 
+    private long lastSendServerLocation = TimeUtils.CurrentTimeMillis();
+
+    private UdpConnect serverUdpConnection;
+
     // Start is called before the first frame update
     private void Start()
     {
+        serverUdpConnection = new UdpConnect(AppProperties.ServerIp, AppProperties.ServerUdpPort);
+         
         spriteRenderer = GetComponent<SpriteRenderer>();
         rigidbody2D = GetComponent<Rigidbody2D>();
         fixedJoystick = GameObject.Find("Fixed Joystick").GetComponent<FixedJoystick>();
@@ -37,8 +46,8 @@ public class PlayerInputMoving : MonoBehaviour
 
                 var position = rigidbody2D.position;
 
-                position.x += joyStickDirection.x * GamePlayProperties.Speed * Time.deltaTime;
-                position.y += joyStickDirection.y * GamePlayProperties.Speed * Time.deltaTime;
+                position.x += joyStickDirection.x * GetComponent<CharacterScript>().Speed * Time.deltaTime;
+                position.y += joyStickDirection.y * GetComponent<CharacterScript>().Speed * Time.deltaTime;
 
                 rigidbody2D.MovePosition(position);
                 GetComponent<CharacterScript>().state = CharacterState.Moving;
@@ -48,6 +57,13 @@ public class PlayerInputMoving : MonoBehaviour
                 GetComponent<CharacterScript>().state = CharacterState.Idle;
 
             }
+        }
+
+        if (lastSendServerLocation + GamePlayProperties.UdpInterval < TimeUtils.CurrentTimeMillis())
+        {
+            serverUdpConnection.Send(new CsCharacterState(UserProperties.MainPlayer.userID, transform.position, fixedJoystick.Direction, GetComponent<CharacterScript>().state));
+            
+            lastSendServerLocation = TimeUtils.CurrentTimeMillis();
         }
     }
 }
