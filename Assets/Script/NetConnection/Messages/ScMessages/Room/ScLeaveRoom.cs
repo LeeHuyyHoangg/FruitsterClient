@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 namespace Script.Messages.ScMessages
 {
+    [Serializable]
     public class ScLeaveRoom : ScMessage
     {
         public string userID;

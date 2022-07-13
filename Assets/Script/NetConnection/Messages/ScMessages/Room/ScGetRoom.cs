@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace Script.Messages.ScMessages
 {
+    [Serializable]
     public class ScGetRoom : ScMessage
     {
         public HttpStatusCode statusCode;

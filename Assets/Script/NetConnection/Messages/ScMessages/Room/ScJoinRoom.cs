@@ -1,3 +1,4 @@
+using System;
 using System.Net;
 using Script.Model;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 namespace Script.Messages.ScMessages
 {
+    [Serializable]
     public class ScJoinRoom : ScMessage
     {
         public User user;

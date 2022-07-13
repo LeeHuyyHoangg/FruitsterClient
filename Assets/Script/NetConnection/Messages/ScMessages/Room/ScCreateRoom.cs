@@ -1,11 +1,14 @@
+using System;
 using System.Net;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Script.Messages.ScMessages
 {
+    [Serializable]
     public class ScCreateRoom: ScMessage
     {
+        
         public HttpStatusCode statusCode;
         public string roomID;
         

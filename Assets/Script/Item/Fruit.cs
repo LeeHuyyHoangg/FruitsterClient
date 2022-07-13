@@ -8,7 +8,7 @@ namespace Script.Item
 
         public override void OnCollide(GameObject gameObject)
         {
-            AppProperties.ServerSession.SendMessage(new CsGetFruit());
+            // AppProperties.ServerSession.SendMessage(new CsUserObtainFruit());
         }
     }
 }
