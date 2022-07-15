@@ -14,7 +14,7 @@ namespace Script.Messages.ScMessages
         {
             if (statusCode == HttpStatusCode.OK)
             {
-                if (userID.Equals(UserProperties.MainPlayer.userID))
+                if (userID == UserProperties.MainPlayer.userID)
                 {
                     UserProperties.UserRoom = null;
                     SingletonDontDestroy.Instance.DoAction(() => SceneManager.LoadScene("AvatarRoomSelectScene"));
@@ -24,7 +24,7 @@ namespace Script.Messages.ScMessages
                 {
                     foreach (var user in UserProperties.UserRoom.Players.ToArray())
                     {
-                        if (user.userID.Equals(userID))
+                        if (user.userID==userID)
                         {
                             UserProperties.UserRoom.Players.Remove(user);
                             break;

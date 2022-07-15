@@ -13,7 +13,7 @@ namespace Script.Messages.CsMessages
         
         public override void OnMessage(Session session)
         {
-            if (statusCode.Equals(HttpStatusCode.OK))
+            if (statusCode==HttpStatusCode.OK)
             {
                 UserProperties.MainPlayer.userID = uid;
             }

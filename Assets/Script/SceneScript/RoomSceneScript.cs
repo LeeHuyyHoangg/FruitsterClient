@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Script.Character;
 using Script.Messages.CsMessages;
+using Script.Messages.CsMessages.GamePlay;
 using Script.Model;
 using UnityEngine;
 using UnityEngine.UI;
@@ -58,7 +59,7 @@ namespace Script
 
         public void StartGame()
         {
-            // throw new NotImplementedException();
+            AppProperties.ServerSession.SendMessage(new CsGameStart());
         }
 
         public void Chat(Text text)

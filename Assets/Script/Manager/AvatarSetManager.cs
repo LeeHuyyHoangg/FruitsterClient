@@ -36,7 +36,7 @@ namespace Script.Character
         {
             foreach (AvatarSet set in _avatarSets)
             {
-                if (set.AvatarName.Equals(assetName))
+                if (set.AvatarName==assetName)
                 {
                     return true;
                 }
@@ -49,7 +49,7 @@ namespace Script.Character
         {
             foreach (AvatarSet set in _avatarSets)
             {
-                if (set.AvatarName.Equals(assetName))
+                if (set.AvatarName==assetName)
                 {
                     return set;
                 }

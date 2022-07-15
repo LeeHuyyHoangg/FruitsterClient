@@ -13,7 +13,12 @@ namespace Script
         
         public static String AppFilePath { get; private set; }
 
+        // private static Session _serverSession;
+
         public static Session ServerSession;
+        // {
+        //     if(_ser)
+        // }
 
         public static bool IsRunning{ get; private set; }
 

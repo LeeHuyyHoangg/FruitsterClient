@@ -11,9 +11,9 @@ namespace Script.Messages.CsMessages
         public float locationY;
         public float directionX;
         public float directionY;
-        public CharacterState state;
+        public ObjectState state;
 
-        public CsCharacterState(string id, Vector2 location, Vector2 direction, CharacterState state)
+        public CsCharacterState(string id, Vector2 location, Vector2 direction, ObjectState state)
         {
             this.id = id;
             this.locationX = location.x;

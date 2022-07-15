@@ -9,7 +9,7 @@ namespace Script.Character
 
         public static CharacterManager Instance => _instance;
         
-        private Dictionary<String, CharacterScript> idToCharacter = new Dictionary<String, CharacterScript>();
+        private Dictionary<String, ObjectScript> idToCharacter = new Dictionary<String, ObjectScript>();
 
         public void AddCharacter(string id)
         {

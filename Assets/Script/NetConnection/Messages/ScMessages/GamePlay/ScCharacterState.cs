@@ -11,7 +11,7 @@ namespace Script.Messages.ScMessages
         public float locationY;
         public float directionX;
         public float directionY;
-        public CharacterState state;
+        public ObjectState state;
         public override void OnMessage(Session session)
         {
             throw new System.NotImplementedException();

@@ -6,7 +6,7 @@ namespace Script
     {
         public const int ChatBubbleExistTime = 3;
         // public static float Speed = 30f;
-        public const float MaxDistance = 20f;
+        public const float MaxDistance = 10f;
         public const long UdpInterval = 500;
         
         public const int MaxMemberNumber = 4;

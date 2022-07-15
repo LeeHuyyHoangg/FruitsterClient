@@ -15,7 +15,7 @@ namespace Script.Messages.ScMessages
         {
             if (statusCode == HttpStatusCode.OK)
             {
-                if (user.userID.Equals(UserProperties.MainPlayer.userID))
+                if (user.userID ==UserProperties.MainPlayer.userID)
                 {
                     SingletonDontDestroy.Instance.DoAction(() =>SceneManager.LoadScene("RoomScene"));
                 }
