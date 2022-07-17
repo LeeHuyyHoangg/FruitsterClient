@@ -14,7 +14,7 @@ namespace Script
         private TcpClient server;
         private NetworkStream serverStream;
         
-        private bool disconnect;
+        public bool Disconnected { get; private set; }
         // private long lastTimeReceiveMessage;
 
         public Session()
@@ -36,7 +36,7 @@ namespace Script
         {
             try
             {
-                disconnect = false;
+                Disconnected = false;
                 
                 // Receive the TcpServer.response.
                 new Thread(() =>
@@ -58,7 +58,7 @@ namespace Script
 
         private void ListenMessage()
         {
-            while (AppProperties.IsRunning && !disconnect)
+            while (AppProperties.IsRunning && !Disconnected)
             {
                 try
                 {
@@ -114,7 +114,7 @@ namespace Script
 
         public void Disconnect()
         {
-            disconnect = true;
+            Disconnected = true;
             server.Close();
             serverStream.Close();
             OnDisconnect();
@@ -130,7 +130,6 @@ namespace Script
         public void OnDisconnect()
         {
             Debug.Log("Session Disconnected");
-            
         }
 
         public bool IsReady()

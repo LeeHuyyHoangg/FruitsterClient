@@ -7,7 +7,7 @@ namespace Script.Item
     {
         public void OnTriggerEnter2D(Collider2D other)
         {
-            AppProperties.ServerSession.SendMessage(new CsUserObtainFruit());
+            AppProperties.ServerSession.SendMessage(new CsUserObtainFruit(gameObject.GetComponent<ObjectScript>().id));
         }
     }
 }
