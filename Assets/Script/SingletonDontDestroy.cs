@@ -24,15 +24,15 @@ namespace Script
         {
             foreach (var action in waitingAction.ToArray())
             {
-                try
-                {
+                // try
+                // {
                     action.Invoke();
                     waitingAction.Remove(action);
-                }
-                catch (Exception e)
-                {
-                    Debug.Log(e);
-                }
+                // }
+                // catch (Exception e)
+                // {
+                //     Debug.Log(e);
+                // }
             }
         }
     }

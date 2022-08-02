@@ -16,8 +16,8 @@ namespace Script.Character.Enemy.OnTrigger
                 other.GetComponent<SpriteRenderer>().material.color = new Color32(255, 255, 255, 255);
                 @object.Speed *= GamePlayProperties.MushroomSlowDownConst;
             }, GamePlayProperties.MushroomPoisonTime);
-
-            GetComponent<Fader>()?.Die();
+            
+            // GetComponent<Fader>()?.Die();
         }
 
     }

@@ -16,6 +16,7 @@ namespace Script
         [SerializeField] private List<GameObject> avatarLocations;
 
         [SerializeField] private List<GameObject> userChatBubbles;
+        [SerializeField] private GameObject gameStartButton;
 
         //name -> chat bubble -> gameObject
         private readonly Dictionary<string, (Text, GameObject, GameObject)> userIdObjects = new Dictionary<string, (Text, GameObject, GameObject)>();
@@ -26,10 +27,15 @@ namespace Script
             {
                 chatBubble.SetActive(false);
             }
+            gameStartButton.SetActive(false);
         }
 
         public void RefreshRoom()
         {
+            if (UserProperties.UserRoom.Players[0].userID == UserProperties.MainPlayer.userID)
+            {
+                gameStartButton.SetActive(true);
+            }
             foreach (var tuples in userIdObjects.Values)
             {
                 try

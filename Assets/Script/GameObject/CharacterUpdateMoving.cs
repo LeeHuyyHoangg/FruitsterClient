@@ -24,14 +24,14 @@ namespace Script.Character
 
         public void FixedUpdate()
         {
-            if (((Vector2) transform.position - location).sqrMagnitude > GamePlayProperties.MaxDistance)
-            {
-                rigidbody2d.MovePosition(location);
-                location = rigidbody2d.position;
-                spriteRenderer.flipX = direction.x > 0;
-            }
-            else
-            {
+            // if (((Vector2) transform.position - location).sqrMagnitude > GamePlayProperties.MaxDistance)
+            // {
+            //     rigidbody2d.MovePosition(location);
+            //     location = rigidbody2d.position;
+            //     spriteRenderer.flipX = direction.x > 0;
+            // }
+            // else
+            // {
                 float speed = GetComponent<ObjectScript>().Speed;
                 if (!transform.position.Equals(location))
                 {
@@ -57,7 +57,7 @@ namespace Script.Character
 
                 rigidbody2d.MovePosition(position);
                 location = rigidbody2d.position;
-            }
+            // }
         }
     }
 }

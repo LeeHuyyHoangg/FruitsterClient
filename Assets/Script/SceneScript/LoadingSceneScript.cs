@@ -17,6 +17,9 @@ namespace Script
         private void Awake()
         {
             var avatarManager = AvatarSetManager.Instance;
+            EnemyManager enemyManager =EnemyManager.Instance;
+            ItemManager itemManager = ItemManager.Instance;
+            SingletonDontDestroy singletonDontDestroy = SingletonDontDestroy.Instance;
             GameObject appProperties = new GameObject("AppProperties");
             appProperties.AddComponent<AppProperties>();
             output.gameObject.SetActive(false);

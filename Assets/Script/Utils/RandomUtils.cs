@@ -13,5 +13,10 @@ namespace Script.Utils
             double exponent = Math.Pow(2.0, random.Next(-126, 128));
             return (float)(mantissa * exponent);
         }
+
+        public static bool NextBool()
+        {
+            return random.Next() > (Int32.MaxValue / 2);
+        }
     }
 }

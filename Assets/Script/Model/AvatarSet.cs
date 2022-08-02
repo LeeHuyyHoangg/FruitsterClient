@@ -9,6 +9,6 @@ public class AvatarSet
     {
         AvatarName = avatarName;
         AvatarDescription = (Resources.Load("AvatarSet/" + avatarName + "/" + avatarName + "Description") as TextAsset)?.text;
-        AvatarPrefab = Resources.Load("AvatarSet/" + avatarName + "/" + avatarName ) as GameObject;
+        AvatarPrefab = Resources.Load("AvatarSet/" + avatarName + "/" + avatarName) as GameObject;
     }
 }

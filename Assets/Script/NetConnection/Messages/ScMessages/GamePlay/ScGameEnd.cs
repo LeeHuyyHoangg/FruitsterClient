@@ -9,7 +9,7 @@ namespace Script.Messages.CsMessages.GamePlay
     {
         public override void OnMessage(Session session)
         {
-            throw new NotImplementedException();
+            PlaySceneScript.Instance.GameEnd();
         }
     }
 }

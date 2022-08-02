@@ -8,6 +8,8 @@ namespace Script
         // public static float Speed = 30f;
         public const float MaxDistance = 10f;
         public const long UdpInterval = 500;
+
+        public const long TcpInterval = 500;
         
         public const int MaxMemberNumber = 4;
 

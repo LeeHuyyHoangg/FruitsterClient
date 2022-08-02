@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 namespace Script.Character
@@ -26,11 +27,10 @@ namespace Script.Character
 
         private static void Init()
         {
-            string[] lines = File.ReadAllLines(Path.Combine(Application.streamingAssetsPath, "EnemyConfig.txt"));
+            string[] lines = Regex.Split((Resources.Load("Config/EnemyConfig") as TextAsset)?.text!, "\r\n|\r|\n");
             foreach (var line in lines)
             {
-                
-                GameObject enemyPrefab = Resources.Load("Enemies/" + line + "/" + line ) as GameObject;
+                GameObject enemyPrefab = Resources.Load("Enemies/" + line + "/" + line) as GameObject;
                 _instance.enemies.Add(enemyPrefab);
             }
         }

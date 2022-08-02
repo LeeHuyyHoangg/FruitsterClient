@@ -35,7 +35,7 @@ namespace Script
             _instance = (T)FindObjectOfType(typeof(T));
             if (_instance == null)
             {
-                var newGo = new GameObject(typeof(T).Name, typeof(T));
+                var newGo = new GameObject().AddComponent<T>();
                 _instance = newGo.GetComponent<T>();
             }
         }

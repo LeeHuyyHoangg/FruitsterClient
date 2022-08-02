@@ -1,4 +1,5 @@
 using System;
+using Script.Character;
 using UnityEngine;
 
 namespace Script.Messages.ScMessages
@@ -14,7 +15,18 @@ namespace Script.Messages.ScMessages
         public ObjectState state;
         public override void OnMessage(Session session)
         {
-            throw new System.NotImplementedException();
+            if (id != UserProperties.MainPlayer.userID)
+            {
+                GameObject go = PlaySceneScript.Instance.GetPlayerById(id);
+                ObjectUpdateMoving objectUpdateMoving = go.GetComponent<ObjectUpdateMoving>();
+                if (objectUpdateMoving != null)
+                {
+                    objectUpdateMoving.location = new Vector2(locationX, locationY);
+                    objectUpdateMoving.direction = new Vector2(directionX, directionY);
+                    go.GetComponent<ObjectScript>().state = state;
+                }
+
+            } 
         }
     }
 }

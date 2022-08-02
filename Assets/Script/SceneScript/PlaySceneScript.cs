@@ -1,37 +1,43 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using Script;
 using Script.Character;
 using Script.Model;
+using Script.Utils;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
+using Random = Unity.Mathematics.Random;
 
 public class PlaySceneScript : SingletonMonoBehavior<PlaySceneScript>
 {
+	public const float ImageRaiseSpeed = 0.5f;
+	
 	[SerializeField] private List<GameObject> userStatistic;
+	[SerializeField] private TMP_Text timer;
+	[SerializeField] private GameObject timeUpBanner;
+	[SerializeField] private Tilemap tilemap;
+	[SerializeField] private GameObject finalStatisticPanel;
+	[SerializeField] private List<GameObject> playerFinalStatistic;
+	
 
-	private CinemachineVirtualCamera camera;
+	private new CinemachineVirtualCamera camera;
 	private readonly Dictionary<string, GameObject> idToGameObject = new Dictionary<string, GameObject>();
 
 	private readonly Dictionary<string, (int, GameObject)> playerIdToPlayerScore = new Dictionary<string, (int, GameObject)>();
-
-	private Tilemap tilemap;
-	// Start is called before the first frame update
-	private void Awake()
-	{
-		tilemap = GameObject.Find( "Tilemap" ).GetComponent<Tilemap>();
-		camera = GameObject.Find( "CM vcam1" ).GetComponent<CinemachineVirtualCamera>();
-		Debug.Log( tilemap );
-		Debug.Log( camera );
-		foreach (GameObject fGameObject in userStatistic)
-		{
-			fGameObject.SetActive( false );
-		}
-	}
-
+	
 	private void Start()
 	{
+		camera = GameObject.Find( "CM vcam1" ).GetComponent<CinemachineVirtualCamera>();
+		
+		foreach (GameObject statistic in userStatistic)
+		{
+			statistic.SetActive( false );
+		}
 		for( int i = 0; i < UserProperties.UserRoom.Players?.Count; i++ )
 		{
 			playerIdToPlayerScore.Add( UserProperties.UserRoom.Players[i].userID, ( 0, userStatistic[i] ) );
@@ -44,6 +50,28 @@ public class PlaySceneScript : SingletonMonoBehavior<PlaySceneScript>
 	// Update is called once per frame
 	private void Update()
 	{
+		float time = float.Parse(timer.text);
+		if (time <= 0)
+		{
+			try
+			{
+				timeUpBanner.SetActive(true);
+				timer.text = "0.00";
+				Time.timeScale = 0;
+
+				return;
+			}
+			catch (Exception)
+			{
+				return;
+			}
+		}
+		if (time < 5)
+		{
+			timer.color = Color.red;
+		}
+		
+		timer.text = $"{time - Time.deltaTime:F2}";
 
 	}
 
@@ -58,7 +86,7 @@ public class PlaySceneScript : SingletonMonoBehavior<PlaySceneScript>
 		}
 	}
 
-	public void InitPlayer( List<PlayerInitState> playerInitStateList )
+	public void InitPlayer( List<PlayerInitState> playerInitStateList , long gameTime)
 	{
 		foreach (PlayerInitState playerInitState in playerInitStateList)
 		{
@@ -66,21 +94,31 @@ public class PlaySceneScript : SingletonMonoBehavior<PlaySceneScript>
 			{
 				if( player.userID == playerInitState.id )
 				{
-					GameObject gameObject = Instantiate( AvatarSetManager.Instance.GetAsset( player.avatar ).AvatarPrefab,
-						tilemap.CellToWorld( new Vector3Int( playerInitState.locationX, playerInitState.locationY, 0 ) ), Quaternion.identity );
+					GameObject prefab = AvatarSetManager.Instance.GetAsset(player.avatar).AvatarPrefab;
+					Vector3 postion = tilemap.CellToWorld(new Vector3Int(playerInitState.locationX, playerInitState.locationY,0));
+					GameObject instantiate = Instantiate( prefab, postion , Quaternion.identity );
 
-					if( gameObject.GetComponent<ObjectScript>() == null )
+					if( instantiate.GetComponent<ObjectScript>() == null )
 					{
-						gameObject.AddComponent<ObjectScript>();
+						instantiate.AddComponent<ObjectScript>();
 					}
+					instantiate.GetComponent<ObjectScript>().id = player.userID;
 
-					gameObject.GetComponent<ObjectScript>().id = player.userID;
-
-					idToGameObject.Add( player.userID, gameObject );
+					idToGameObject.Add( player.userID, instantiate );
+					if (player.userID == UserProperties.MainPlayer.userID)
+					{
+						camera.Follow = instantiate.transform;
+						instantiate.AddComponent<PlayerInputMoving>();
+					}
+					else
+					{
+						instantiate.AddComponent<ObjectUpdateMoving>();
+					}
 					break;
 				}
 			}
 		}
+		timer.text = $"{gameTime:F2}";
 	}
 
 	public void SpawnEnemy( string id, string type, Vector3Int position)
@@ -93,6 +131,8 @@ public class PlaySceneScript : SingletonMonoBehavior<PlaySceneScript>
 			{
 				instantiate.AddComponent<ObjectScript>();
 			}
+			instantiate.SetActive(true);
+			instantiate.GetComponent<SpriteRenderer>().flipX = RandomUtils.NextBool();
 			instantiate.GetComponent<ObjectScript>().id = id;
 			idToGameObject.Add( id, instantiate );
 		}
@@ -108,8 +148,83 @@ public class PlaySceneScript : SingletonMonoBehavior<PlaySceneScript>
 			{
 				instantiate.AddComponent<ObjectScript>();
 			}
+			instantiate.SetActive(true);
+			instantiate.GetComponent<SpriteRenderer>().flipX = RandomUtils.NextBool();
 			instantiate.GetComponent<ObjectScript>().id = id;
 			idToGameObject.Add( id, instantiate );
 		}
+	}
+
+	public void DestroyById(String id)
+	{
+		if (idToGameObject.ContainsKey(id))
+		{
+			Destroy(idToGameObject[id]);
+			idToGameObject.Remove(id);
+		}
+	}
+
+	public GameObject GetPlayerById(string id)
+	{
+		if (idToGameObject.ContainsKey(id))
+		{
+			return idToGameObject[id];
+		}
+		else
+		{
+			return null;
+		}
+	}
+
+	public void GameEnd()
+	{
+		finalStatisticPanel.SetActive(true);
+		int maxScore = -1;
+		foreach (var value in playerIdToPlayerScore.Values)
+		{
+			maxScore = Math.Max(maxScore, value.Item1);
+		}
+		for (int i = 0; i < UserProperties.UserRoom.Players.Count; i++)
+		{
+			TMP_Text userName = playerFinalStatistic[i].transform.Find("UserName").GetComponent<TMP_Text>();
+			userName.text = userStatistic[i].transform.Find("UserName").GetComponent<TMP_Text>().text;
+			
+			TMP_Text userScore = playerFinalStatistic[i].transform.Find("UserScore").GetComponent<TMP_Text>();
+			userScore.text = userStatistic[i].transform.Find("UserScore").GetComponent<TMP_Text>().text;
+			
+			Image image = playerFinalStatistic[i].transform.Find("Image").GetComponent<Image>();
+			StartCoroutine(RaiseImage(image, maxScore !=0 ? int.Parse(userScore.text)/maxScore: 0.1f));
+		}
+
+		for (int i = UserProperties.UserRoom.Players.Count; i < playerFinalStatistic.Count; i++)
+		{
+			playerFinalStatistic[i].SetActive(false);
+		}
+	}
+
+	private IEnumerator RaiseImage(Image image, float upto)
+	{
+		float current = 0;
+		while (current < upto)
+		{
+			try
+			{
+				current += Time.deltaTime * ImageRaiseSpeed;
+				image.fillAmount = current;
+			}
+			catch (Exception)
+			{
+				//ignored
+			}
+			yield return current;
+		}
+		
+	}
+
+	public void BackToRoomScene()
+	{
+		UserProperties.UserRoom = new Room();
+		Time.timeScale = 1;
+		SceneManager.LoadScene("AvatarRoomSelectScene");
 	}
 }

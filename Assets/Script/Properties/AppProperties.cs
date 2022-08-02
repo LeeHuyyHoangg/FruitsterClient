@@ -15,26 +15,8 @@ namespace Script
 
         // private static Session _serverSession;
 
-        private static Session _serverSession;
 
-        public static Session ServerSession
-        {
-            get
-            {
-                if (_serverSession == null || _serverSession.Disconnected)
-                {
-                    _serverSession = new Session(ServerIp, ServerTcpPort);
-                    while (!_serverSession.IsReady())
-                    {
-                        
-                    }
-                }
-
-                return _serverSession;
-            }
-
-            set => _serverSession = value;
-        }
+        public static Session ServerSession { get; set; }
 
         public static bool IsRunning{ get; private set; }
 

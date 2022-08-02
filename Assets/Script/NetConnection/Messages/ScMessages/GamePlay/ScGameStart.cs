@@ -10,12 +10,14 @@ namespace Script.Messages.CsMessages.GamePlay
     public class ScGameStart : ScMessage
     {
         public List<PlayerInitState> playerInitStateList;
+        public long gameTime;
         public override void OnMessage(Session session)
         {
+            SceneManager.LoadScene("PlayScene");
             SingletonDontDestroy.Instance.DoAction(() =>
             {
-                SceneManager.LoadScene("PlayScene");
-                PlaySceneScript.Instance.InitPlayer(playerInitStateList);
+                
+                PlaySceneScript.Instance.InitPlayer(playerInitStateList,gameTime);
             });
         }
     }

@@ -1,0 +1,25 @@
+# List of SDK dependencies of this app, this information is also included in an encrypted form in the APK.
+# For more information visit: https://d.android.com/r/tools/dependency-metadata
+
+library {
+  maven_library {
+    artifactId: "IngameDebugConsole"
+  }
+  digests {
+    sha256: "\272\037|1\270\260ae7\226\'\343\"\267G\315\335w\261D\214\214\323\037\336{\212\321\343\223+}"
+  }
+}
+library {
+  digests {
+    sha256: "\217\0065\260\244C2R\317.\236\336\2112\321\265\2007\244\326\345\033C\244s\325\000\237.\tl\274"
+  }
+}
+library_dependencies {
+}
+library_dependencies {
+  library_index: 1
+}
+module_dependencies {
+  module_name: "base"
+  dependency_index: 1
+}

@@ -18,19 +18,19 @@ namespace Script.Character.Enemy.OnTrigger
             ObjectScript @object = other.GetComponent<ObjectScript>();
             @object.Speed *= GamePlayProperties.SlimeSlowDownConst;
             
-            SingletonDontDestroy.Instance.RunAfterSec(() =>
-                {
-                    try
-                    {
-                        gameObject.GetComponent<Fader>()?.Die();
-                    }
-                    catch (Exception e)
-                    {
-                        Debug.Log(e);
-                    }
-                },
-
-            GamePlayProperties.SlimeExistTime);
+            // SingletonDontDestroy.Instance.RunAfterSec(() =>
+            //     {
+            //         try
+            //         {
+            //             gameObject.GetComponent<Fader>()?.Die();
+            //         }
+            //         catch (Exception e)
+            //         {
+            //             Debug.Log(e);
+            //         }
+            //     },
+            //
+            // GamePlayProperties.SlimeExistTime);
             
         }
     }

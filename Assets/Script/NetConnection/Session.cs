@@ -76,7 +76,7 @@ namespace Script
                         try
                         {
                             ScMessage receivedMessage = (ScMessage) JsonUtils.JsonToMessage(responseData);
-                            receivedMessage.OnMessage(this);
+                            SingletonDontDestroy.Instance.DoAction(() => receivedMessage.OnMessage(this));
                         }
                         catch (Exception e)
                         {
