@@ -71,12 +71,16 @@ namespace Script
                         // Read the first batch of the TcpServer response bytes.
                         Int32 bytes = serverStream.Read(data, 0, data.Length);
                         string responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
-                        Debug.Log("Received: " + responseData);
+                        
                         // SendMessage(new Ping());
+                        Debug.Log(responseData);
                         try
                         {
-                            ScMessage receivedMessage = (ScMessage) JsonUtils.JsonToMessage(responseData);
-                            SingletonDontDestroy.Instance.DoAction(() => receivedMessage.OnMessage(this));
+                            foreach (ScMessage receivedMessage in JsonUtils.JsonToMessages(responseData))
+                            {
+                                Debug.Log("Received: " + receivedMessage.GetType().Name + JsonUtility.ToJson(receivedMessage));
+                                SingletonDontDestroy.Instance.DoAction(() => receivedMessage.OnMessage(this));
+                            }
                         }
                         catch (Exception e)
                         {

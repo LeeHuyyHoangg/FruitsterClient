@@ -1030,6 +1030,7 @@ MonoBehaviour:
   createRoomPass: {fileID: 1719628807}
   joinRoomId: {fileID: 2069974987}
   joinRoomPass: {fileID: 815988828}
+  joinRoomPanel: {fileID: 1513911963}
 --- !u!114 &397501227
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -24,14 +24,7 @@ public class RegisterSceneScript : MonoBehaviour
     {
         if (UserProperties.MainPlayer.userID == null)
         {
-            if (UserProperties.RegisterFailed)
-            {
-                error.SetActive(true);
-            }
-            else
-            {
-                error.SetActive(false);
-            }
+            error.SetActive(UserProperties.RegisterFailed);
         }
         else
         {

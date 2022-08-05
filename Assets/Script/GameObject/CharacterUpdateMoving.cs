@@ -4,8 +4,8 @@ namespace Script.Character
 {
     public class ObjectUpdateMoving : MonoBehaviour
     {
-        public Vector2 location;
-        public Vector2 direction;
+        public Vector3 location;
+        public Vector3 direction;
         public ObjectState state;
         
         
@@ -24,21 +24,22 @@ namespace Script.Character
 
         public void FixedUpdate()
         {
-            // if (((Vector2) transform.position - location).sqrMagnitude > GamePlayProperties.MaxDistance)
-            // {
-            //     rigidbody2d.MovePosition(location);
-            //     location = rigidbody2d.position;
-            //     spriteRenderer.flipX = direction.x > 0;
-            // }
-            // else
-            // {
+            if ((transform.position - location).sqrMagnitude > GamePlayProperties.MaxDistance)
+            {
+                // rigidbody2d.MovePosition(location);
+                transform.position = location;
+                // location = rigidbody2d.position;
+                spriteRenderer.flipX = direction.x > 0;
+            }
+            else
+            {
                 float speed = GetComponent<ObjectScript>().Speed;
                 if (!transform.position.Equals(location))
                 {
                     var vector2 = location;
                     vector2.x += direction.x * speed * GamePlayProperties.UdpInterval;
                     vector2.y += direction.y * speed * GamePlayProperties.UdpInterval;
-                    direction = (vector2 - (Vector2) transform.position) /
+                    direction = (vector2 - transform.position) /
                                 (speed * GamePlayProperties.UdpInterval);
                 }
                 if (directionPreference)
@@ -57,7 +58,7 @@ namespace Script.Character
 
                 rigidbody2d.MovePosition(position);
                 location = rigidbody2d.position;
-            // }
+            }
         }
     }
 }

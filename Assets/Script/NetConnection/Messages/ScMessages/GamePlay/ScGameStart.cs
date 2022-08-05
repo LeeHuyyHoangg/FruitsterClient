@@ -16,7 +16,6 @@ namespace Script.Messages.CsMessages.GamePlay
             SceneManager.LoadScene("PlayScene");
             SingletonDontDestroy.Instance.DoAction(() =>
             {
-                
                 PlaySceneScript.Instance.InitPlayer(playerInitStateList,gameTime);
             });
         }

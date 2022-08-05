@@ -103,6 +103,7 @@
      <Compile Include="Assets\Import\ImportTools\Joystick Pack\Scripts\Joysticks\FloatingJoystick.cs" />
      <Compile Include="Assets\Script\SceneScript\PlaySceneScript.cs" />
      <Compile Include="Assets\Script\NetConnection\Messages\CsMessages\UserValidation\CsRegister.cs" />
+     <Compile Include="Assets\Script\NetConnection\Messages\CsMessages\CsChangeAvatar.cs" />
      <Compile Include="Assets\Script\NetConnection\Messages\ScMessages\GamePlay\ScUserObtainItem.cs" />
      <Compile Include="Assets\Script\SingletonMonoBehavior.cs" />
      <Compile Include="Assets\Script\NetConnection\UdpConnect.cs" />
@@ -151,6 +152,7 @@
      <None Include="Assets\Import\ImportTools\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
      <None Include="Assets\Resources\Config\AvatarConfig.txt" />
      <None Include="Assets\Import\ImportTools\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
+     <None Include="Assets\Resources\AvatarSet\Chameleon\ChameleonDescription.txt" />
      <None Include="Assets\Import\ImportAssets\20 Logos PSD\Fonts\peacesans\FREE FONT LICENSE.txt" />
      <None Include="Assets\Import\ImportTools\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
      <None Include="Assets\Import\ImportAssets\20 Logos PSD\Fonts\molot\molot-eula.txt" />

@@ -20,6 +20,8 @@ public class RoomSelectSceneScript : SingletonMonoBehavior<RoomSelectSceneScript
 
     [SerializeField] private InputField joinRoomPass;
 
+    [SerializeField] private GameObject joinRoomPanel;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -51,7 +53,8 @@ public class RoomSelectSceneScript : SingletonMonoBehavior<RoomSelectSceneScript
                     }
                     else
                     {
-                        
+                        joinRoomPanel.SetActive(true);
+                        joinRoomId.text = rooms[i1].roomID;
                     }
                 });
             }

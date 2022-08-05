@@ -22,17 +22,23 @@ namespace Script
 
         private void Update()
         {
-            foreach (var action in waitingAction.ToArray())
+            try
             {
-                // try
-                // {
-                    action.Invoke();
-                    waitingAction.Remove(action);
-                // }
-                // catch (Exception e)
-                // {
-                //     Debug.Log(e);
-                // }
+                foreach (var action in new List<Action>(waitingAction))
+                {
+                    try
+                    {
+                        action.Invoke();
+                        waitingAction.Remove(action);
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.Log(e);
+                    }
+                }
+            } catch (Exception e)
+            {
+                Debug.Log(e);
             }
         }
     }

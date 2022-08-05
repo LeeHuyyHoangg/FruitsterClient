@@ -48,10 +48,10 @@ public class PlaySceneScript : SingletonMonoBehavior<PlaySceneScript>
 	}
 
 	// Update is called once per frame
-	private void Update()
+	private void FixedUpdate()
 	{
 		float time = float.Parse(timer.text);
-		if (time <= 0)
+		if (time <= 0 && !timeUpBanner.activeSelf)
 		{
 			try
 			{

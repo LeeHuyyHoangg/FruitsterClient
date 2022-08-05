@@ -19,7 +19,7 @@ namespace Script.Messages.CsMessages
             }
             else
             {
-                UserProperties.LoginFailed = true;
+                UserProperties.RegisterFailed = true;
             }
         }
     }

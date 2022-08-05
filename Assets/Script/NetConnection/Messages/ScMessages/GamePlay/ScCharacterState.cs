@@ -21,8 +21,8 @@ namespace Script.Messages.ScMessages
                 ObjectUpdateMoving objectUpdateMoving = go.GetComponent<ObjectUpdateMoving>();
                 if (objectUpdateMoving != null)
                 {
-                    objectUpdateMoving.location = new Vector2(locationX, locationY);
-                    objectUpdateMoving.direction = new Vector2(directionX, directionY);
+                    objectUpdateMoving.location = new Vector3(locationX, locationY,objectUpdateMoving.location.z);
+                    objectUpdateMoving.direction = new Vector3(directionX, directionY,objectUpdateMoving.location.z);
                     go.GetComponent<ObjectScript>().state = state;
                 }
 

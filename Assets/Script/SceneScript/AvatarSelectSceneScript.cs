@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Script;
 using Script.Character;
+using Script.Messages.CsMessages;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -52,6 +53,8 @@ public class AvatarSelectSceneScript : MonoBehaviour
 
     private void UpdateAvatar()
     {
+        AppProperties.ServerSession.SendMessage(new CsChangeAvatar(UserProperties.UserAvatarSet.AvatarName));
+        
         if (actualAvatar != null)
         {
             Destroy(actualAvatar.gameObject);

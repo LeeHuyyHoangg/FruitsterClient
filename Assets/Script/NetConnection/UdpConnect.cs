@@ -71,9 +71,11 @@ namespace Script
                     // Blocks until a message returns on this socket from a remote host.
                     var receiveBytes = _udpClient.Receive(ref _remoteEndPoint);
                     var returnData = Encoding.ASCII.GetString(receiveBytes);
-                    var receiveMessage = (ScMessage) JsonUtils.JsonToMessage(returnData);
+                    foreach (ScMessage receivedMessage in JsonUtils.JsonToMessages(returnData))
+                    {
+                        SingletonDontDestroy.Instance.DoAction(() => receivedMessage.OnMessage(new Session()));
 
-                    SingletonDontDestroy.Instance.DoAction(() => receiveMessage.OnMessage(new Session()));
+                    }
                 }
             }
         }
